@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI OCR Tool | Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>AI OCR Tool</span>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="ocr.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>OCR Processing</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
+                </a>
+            </nav>
+
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">Loading...</span>
+                    <span class="user-plan">Pro Plan</span>
+                </div>
+                <button class="btn btn-icon" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='ocr.html'">
+                        <i class="fas fa-plus"></i>
+                        New Document
+                    </button>
+                </div>
+            </header>
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Documents</h3>
+                        <p class="stat-value">1,234</p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            12% from last month
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Success Rate</h3>
+                        <p class="stat-value">98.5%</p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            2.5% improvement
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Average Processing Time</h3>
+                        <p class="stat-value">2.3s</p>
+                        <p class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i>
+                            0.5s faster
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Storage Used</h3>
+                        <p class="stat-value">2.5 GB</p>
+                        <div class="storage-bar">
+                            <div class="storage-progress" style="width: 50%"></div>
+                        </div>
+                        <p class="storage-info">5 GB total</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Documents -->
+            <div class="recent-documents">
+                <div class="section-header">
+                    <h2>Recent Documents</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+
+                <div class="documents-grid">
+                    <div class="document-card">
+                        <div class="document-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="document-info">
+                            <h3>Meeting Notes.pdf</h3>
+                            <p class="document-date">Processed 2 hours ago</p>
+                            <div class="document-stats">
+                                <span class="stat">
+                                    <i class="fas fa-check-circle"></i>
+                                    98% Accuracy
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    1.8s
+                                </span>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="document-card">
+                        <div class="document-icon">
+                            <i class="fas fa-file-image"></i>
+                        </div>
+                        <div class="document-info">
+                            <h3>Handwritten Notes.jpg</h3>
+                            <p class="document-date">Processed yesterday</p>
+                            <div class="document-stats">
+                                <span class="stat">
+                                    <i class="fas fa-check-circle"></i>
+                                    95% Accuracy
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    2.1s
+                                </span>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="document-card">
+                        <div class="document-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div class="document-info">
+                            <h3>Research Paper.pdf</h3>
+                            <p class="document-date">Processed 2 days ago</p>
+                            <div class="document-stats">
+                                <span class="stat">
+                                    <i class="fas fa-check-circle"></i>
+                                    99% Accuracy
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    2.5s
+                                </span>
+                            </div>
+                        </div>
+                        <div class="document-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Check authentication and redirect if not logged in
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userEmail = localStorage.getItem('userEmail');
+            
+            if (!isLoggedIn || !userEmail) {
+                // Store the current URL to redirect back after login
+                localStorage.setItem('redirectAfterLogin', window.location.href);
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Initialize dashboard
+        function initDashboard() {
+            if (!checkAuth()) return;
+
+            // Set username
+            const username = localStorage.getItem('username') || localStorage.getItem('userEmail').split('@')[0];
+            document.getElementById('userName').textContent = username;
+
+            // Handle logout
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                // Clear all auth-related data
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('username');
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('redirectAfterLogin');
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            });
+
+            // Load user data and statistics
+            loadUserData();
+        }
+
+        // Load user data and statistics
+        function loadUserData() {
+            // In a real application, you would fetch this data from your backend
+            // For demo purposes, we'll use static data
+            const stats = {
+                totalDocuments: 1234,
+                successRate: 98.5,
+                avgProcessingTime: 2.3,
+                storageUsed: 2.5,
+                storageTotal: 5
+            };
+
+            // Update statistics
+            document.querySelector('.stat-value:nth-child(2)').textContent = stats.totalDocuments;
+            document.querySelector('.stat-value:nth-child(3)').textContent = `${stats.successRate}%`;
+            document.querySelector('.stat-value:nth-child(4)').textContent = `${stats.avgProcessingTime}s`;
+            document.querySelector('.stat-value:nth-child(5)').textContent = `${stats.storageUsed} GB`;
+            document.querySelector('.storage-progress').style.width = `${(stats.storageUsed / stats.storageTotal) * 100}%`;
+            document.querySelector('.storage-info').textContent = `${stats.storageTotal} GB total`;
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html> 

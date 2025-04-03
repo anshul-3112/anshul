@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI OCR Tool | Document Processing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ocr.css">
+</head>
+<body>
+    <div class="ocr-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>AI OCR Tool</span>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
+                </a>
+            </nav>
+
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-details">
+                    <span class="user-name">John Doe</span>
+                    <span class="user-plan">Pro Plan</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Document Processing</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="uploadBtn">
+                        <i class="fas fa-upload"></i>
+                        Upload Document
+                    </button>
+                    <button class="btn btn-secondary" id="settingsBtn">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                </div>
+            </header>
+
+            <!-- Processing Area -->
+            <div class="processing-area">
+                <div class="upload-zone" id="uploadZone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop your document here</h3>
+                    <p>or</p>
+                    <button class="btn btn-primary">Browse Files</button>
+                    <p class="file-types">Supported formats: JPG, PNG, PDF, TIFF</p>
+                </div>
+
+                <div class="processing-options hidden" id="processingOptions">
+                    <div class="options-header">
+                        <h3>Processing Options</h3>
+                        <button class="btn btn-icon" id="closeOptions">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="options-content">
+                        <div class="option-group">
+                            <label>Document Type</label>
+                            <select id="docType">
+                                <option value="handwritten">Handwritten Text</option>
+                                <option value="printed">Printed Text</option>
+                                <option value="mixed">Mixed Content</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Language</label>
+                            <select id="language">
+                                <option value="eng">English</option>
+                                <option value="spa">Spanish</option>
+                                <option value="fra">French</option>
+                                <option value="deu">German</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Image Enhancement</label>
+                            <div class="enhancement-options">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="enhanceContrast" checked>
+                                    <span>Enhance Contrast</span>
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="removeNoise" checked>
+                                    <span>Remove Noise</span>
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="deskew" checked>
+                                    <span>Auto Deskew</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Output Format</label>
+                            <div class="format-options">
+                                <label class="radio">
+                                    <input type="radio" name="format" value="txt" checked>
+                                    <span>Plain Text</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="format" value="docx">
+                                    <span>Word Document</span>
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="format" value="pdf">
+                                    <span>PDF</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="options-footer">
+                        <button class="btn btn-secondary" id="cancelProcess">Cancel</button>
+                        <button class="btn btn-primary" id="startProcess">Start Processing</button>
+                    </div>
+                </div>
+
+                <div class="processing-status hidden" id="processingStatus">
+                    <div class="status-header">
+                        <h3>Processing Document</h3>
+                        <div class="progress-bar">
+                            <div class="progress" id="progressBar"></div>
+                        </div>
+                    </div>
+
+                    <div class="status-content">
+                        <div class="status-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Uploading document...</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Processing image...</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="far fa-circle"></i>
+                            <span>Extracting text...</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="far fa-circle"></i>
+                            <span>Formatting output...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-area hidden" id="resultsArea">
+                    <div class="results-header">
+                        <h3>Extracted Text</h3>
+                        <div class="results-actions">
+                            <button class="btn btn-icon" id="copyText">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="btn btn-icon" id="downloadText">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button class="btn btn-icon" id="editText">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="results-content">
+                        <div class="text-preview" id="textPreview" contenteditable="true">
+                            <!-- Extracted text will appear here -->
+                        </div>
+                    </div>
+
+                    <div class="results-footer">
+                        <button class="btn btn-secondary" id="newDocument">Process New Document</button>
+                        <button class="btn btn-primary" id="saveDocument">Save Document</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Modal -->
+            <div class="modal hidden" id="settingsModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Settings</h3>
+                        <button class="btn btn-icon" id="closeSettings">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="settings-section">
+                            <h4>General Settings</h4>
+                            <div class="setting-item">
+                                <label>Default Language</label>
+                                <select id="defaultLanguage">
+                                    <option value="eng">English</option>
+                                    <option value="spa">Spanish</option>
+                                    <option value="fra">French</option>
+                                    <option value="deu">German</option>
+                                    <option value="ita">Italian</option>
+                                    <option value="por">Portuguese</option>
+                                    <option value="rus">Russian</option>
+                                    <option value="chi">Chinese</option>
+                                    <option value="jpn">Japanese</option>
+                                    <option value="kor">Korean</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Default Output Format</label>
+                                <select id="defaultFormat">
+                                    <option value="txt">Plain Text</option>
+                                    <option value="docx">Word Document</option>
+                                    <option value="pdf">PDF</option>
+                                    <option value="rtf">Rich Text Format</option>
+                                    <option value="html">HTML</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Theme</label>
+                                <select id="theme">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="system">System Default</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Processing Settings</h4>
+                            <div class="setting-item">
+                                <label>Image Quality</label>
+                                <select id="imageQuality">
+                                    <option value="low">Low (Faster)</option>
+                                    <option value="medium" selected>Medium (Balanced)</option>
+                                    <option value="high">High (Better Quality)</option>
+                                    <option value="ultra">Ultra (Best Quality)</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Auto-Enhancement</label>
+                                <div class="enhancement-options">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="autoEnhance" checked>
+                                        <span>Enable Auto-Enhancement</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="autoDeskew" checked>
+                                        <span>Auto Deskew</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="autoCrop" checked>
+                                        <span>Auto Crop</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Processing Priority</label>
+                                <select id="processingPriority">
+                                    <option value="normal">Normal</option>
+                                    <option value="high">High</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Storage Settings</h4>
+                            <div class="setting-item">
+                                <label>Auto-Save Processed Documents</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="autoSave" checked>
+                                    <span class="slider"></span>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Maximum Storage</label>
+                                <div class="storage-info">
+                                    <span>2.5 GB used of 5 GB</span>
+                                    <div class="storage-bar">
+                                        <div class="storage-progress" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Storage Location</label>
+                                <select id="storageLocation">
+                                    <option value="cloud">Cloud Storage</option>
+                                    <option value="local">Local Storage</option>
+                                    <option value="both">Both</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>History Settings</h4>
+                            <div class="setting-item">
+                                <label>History Retention Period</label>
+                                <select id="historyRetention">
+                                    <option value="7">7 days</option>
+                                    <option value="30" selected>30 days</option>
+                                    <option value="90">90 days</option>
+                                    <option value="365">1 year</option>
+                                    <option value="forever">Forever</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Auto-Clear History</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="autoClearHistory">
+                                    <span class="slider"></span>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Export History</label>
+                                <button class="btn btn-secondary" id="exportHistory">
+                                    <i class="fas fa-download"></i>
+                                    Export History
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>OCR Tools</h4>
+                            <div class="setting-item">
+                                <label>Default OCR Engine</label>
+                                <select id="ocrEngine">
+                                    <option value="tesseract">Tesseract</option>
+                                    <option value="google">Google Cloud Vision</option>
+                                    <option value="azure">Azure Computer Vision</option>
+                                    <option value="aws">Amazon Textract</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label>Advanced OCR Options</label>
+                                <div class="enhancement-options">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="enableTableDetection" checked>
+                                        <span>Table Detection</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="enableLayoutAnalysis" checked>
+                                        <span>Layout Analysis</span>
+                                    </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="enableHandwritingRecognition" checked>
+                                        <span>Handwriting Recognition</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label>Batch Processing</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="enableBatchProcessing">
+                                    <span class="slider"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="resetSettings">Reset to Default</button>
+                        <button class="btn btn-secondary" id="cancelSettings">Cancel</button>
+                        <button class="btn btn-primary" id="saveSettings">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="ocr.js"></script>
+</body>
+</html> 
